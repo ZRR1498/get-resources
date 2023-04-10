@@ -1,11 +1,12 @@
 # Polling Service
-This service queries resources at the specified url in the configuration file (for this project, separate applications with views were created that can be accessed). Data from resources comes to the service in various formats, after which they are parsed and saved to the database. If the condition is met (the sum of real numbers in the database for the current day is more than 1000), a post-request is made to a third-party service (which is also implemented as a separate application within the framework of this project).
+This service queries resources at the specified urls in the configuration file (for this project, separate applications with views were created that can be accessed). Data from resources comes to the service in various formats, after which they are parsed and saved to the database PostgreSQL. If the condition is met (the sum of float numbers in the database for the current day is more than 1000), a post-request is made to a third-party service (which is also implemented as a separate application within the framework of this project).
+
 ### Main functionality:
 * **Poll three services to get data**
 * **If the condition is met - a post-request for a third-party service**
 * **Separate views for displaying data from the database, as well as events (fixing post-requests to a third-party service)**
 
-### Requirements
+### Requirements:
 * Language: **Python 3.11**
 * Frameworks: **Django 4.2** and **Django Rest Framework 3.14.0** and **Celery 5.2.7**
 * Databases: **PostgreSQL 15** and **Redis**
@@ -51,8 +52,6 @@ Create a superuser in the same terminal window:
     python manage.py createsuperuser
 
 ### All done!
-
-
 
 ## Project structure:
 * **main_app** - the main service that polls resources, and if the condition is met (the sum of real numbers is greater than 1000 for the current day in the PostgreSQL database in the Data model), it makes a post-request by url to the receiving_service. 
