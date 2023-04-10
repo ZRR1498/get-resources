@@ -8,7 +8,7 @@ This service queries resources at the specified urls in the configuration file (
 
 ### Requirements:
 * Language: **Python 3.11**
-* Frameworks: **Django 4.2** and **Django Rest Framework 3.14.0** and **Celery 5.2.7**
+* Frameworks: **Django 4.2**, **Django Rest Framework 3.14.0** and **Celery 5.2.7**
 * Databases: **PostgreSQL 15** and **Redis**
 
 ## Preparing
@@ -60,11 +60,11 @@ Create a superuser in the same terminal window:
 * **receiving_service** - a service that receives the time of the event by post-request  and writes it to the database in the Event model (if the condition of the sum of numbers is greater than 1000 for the current day in the PostgreSQL database in the Data model). 
         View all events: **'http://127.0.0.1:8000/post-service/events/'**
 
-* **resource_first** - a service that sends data in xml format on a get-request like: <root><date>12-02-2023 00:00</date><data>NUMBER</data></root>. 
+* **resource_first** - a service that sends data in xml format on a get-request like: `<root><date>12-02-2023 00:00</date><data>NUMBER</data></root>`. 
         Get response from service: **'http://127.0.0.1:8000/resource-first/resource/'**
 
-* **resource_second** - a service that sends data in json format on a get request like this: { "data": "NUMBER", "date":"2023-02-12 00:00"}. 
+* **resource_second** - a service that sends data in json format on a get request like this: `{ "data": "NUMBER", "date":"2023-02-12 00:00"}`. 
         Get response from service: **'http://127.0.0.1:8000/resource-second/resource/'**
 
-* **resource_third** - a service that sends data in the string format on a get request: "1676160000 NUMBER". 
+* **resource_third** - a service that sends data in the string format on a get request: `"1676160000 NUMBER"`. 
         Get response from service: **'http://127.0.0.1:8000/resource-third/resource/'**
