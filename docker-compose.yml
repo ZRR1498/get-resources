@@ -1,17 +1,46 @@
-version: '3.9'
+version: "3.9"
 
 services:
-  db:
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./backend/.env
+    volumes:
+      - .:/backend
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             celery -A backend worker -l info &
+             celery -A backend beat -l info &
+             python manage.py runserver 0.0.0.0:8000"
+  
+
+  postgres:
     image: postgres:15
     restart: always
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
+
+  redis:
+    image: redis:6
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DB=0
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres_data:
