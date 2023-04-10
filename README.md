@@ -42,4 +42,12 @@ Run the following command in a terminal:
 
     docker-compose up
 
+Then go into the application container by running the following command in an additional terminal window:
+    
+    docker exec -it backend sh
+
+Create a superuser in the same terminal window:
+    
+    python manage.py createsuperuser
+
 ### All done!
