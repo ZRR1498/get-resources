@@ -38,7 +38,7 @@ Create **.env** file in the main **backend** directory and fill it in as in the 
         MAIN_APP_URL='http://127.0.0.1:8000/main-service/get-data/'
 
 ## Application launch
-Run the following command in a terminal:
+Run the following command in a terminal from the root directory of the project:
 
     docker-compose up
 
